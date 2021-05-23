@@ -54,3 +54,25 @@ class Post(models.Model):
 #     def __str__(self):
 #         """Return email."""
 #         return self.email
+
+class Image(models.Model):
+    '''
+    Image model
+    '''
+    image = CloudinaryField('photos')
+    image_name = models.CharField(max_length=30, blank=True)
+    image_caption = models.TextField(max_length=100, blank=True)
+    user = models.ForeignKey(User, related_name="posted_by", on_delete=models.CASCADE, null=True)
+    liker = models.ForeignKey(User, related_name='liked_by', on_delete=models.CASCADE, null=True)
+    post_date = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-post_date']
+
+    def __str__(self):
+        return self.image_name
+
+    @classmethod
+    def get_all(cls):
+        images = cls.objects.all()
+        return images
