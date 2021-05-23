@@ -1,26 +1,25 @@
 {%extends 'base.html'%}
-
+{% load static %}
+{% load bootstrap5 %}
 {% block content %}
 {{ block.super}}
 <div class="container">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-5">
             <div class="content-section">
-                <div class="media">
+                <div class="media" style="display: flex; ">
                     <img src="{{ user.profile.picture.url }}" alt="profile image" class="rounded-circle profile-img">
-                    <div class="media-body">
-                        <h2 class="account-heading ml-4">Username: {{ user.username }}</h2>
-                        <p class="text-secondary ml-4"> Email: {{ user.email }}</p>
-                        <p class="text-secondary ml-4">Bio: {{ user.profile.biography }}</p>
+                    <div class="media-body" style="margin-left:40px; margin-top:45px">
+                        <h2 class="account-heading">Username: {{ user.username }}</h2>
+                        <p class="text-secondary"> Email: {{ user.email }}</p>
+                        <p class="text-secondary ">Bio: {{ user.profile.biography }}</p>
                     </div>
                 </div>
                 <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <fieldset class="form-group">
-                        <legend class="boarder-bottom mb-4">Profile Info</legend>
-                        {{ u_form }}
-                        {{ p_form }}
-                    </fieldset>
+                    <legend class="boarder-bottom my-4" style="font-style: italic; font-weight:bold; font-size: 30px;">Profile Info</legend>
+                    {% bootstrap_form u_form%}
+                    {% bootstrap_form p_form%}
                     <div class="form-group">
                         <button class="btn btn-outline-info" type="submit">Update</button>
                     </div>
