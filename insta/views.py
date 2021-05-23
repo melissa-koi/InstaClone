@@ -17,18 +17,17 @@ def profile(request):
     title = 'Profile'
     if request.method == "POST":
         u_form = UserUpdateForm(request.POST,instance=request.user)
-        p_form = ProfileUpdateForm(request.POST,request.FILES,instance=request.user.profile)
+        p_form = ProfileUpdateForm(request.POST,instance=request.user.profile)
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
             messages.success(request,f"You Have Successfully Updated Your Profile!")
             return redirect('profile')
-    else:
-        u_form = UserUpdateForm(instance=request.user)
-        p_form = ProfileUpdateForm(instance=request.user.profile)
-        context = {
-            'title':title,
-            'u_form':u_form,
-            'p_form':p_form
-        }
-    return render(request,'profile.html',context)
+        else:
+            return redirect('update_profile')
+
+    return render(request,'profile.html',{"title":title})
+def update_profile(request):
+    u_form = UserUpdateForm(instance=request.user)
+    p_form = ProfileUpdateForm(instance=request.user.profile)
+    return render(request,'update_profile.html',{"u_form":u_form, "p_form":p_form})

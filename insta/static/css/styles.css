@@ -1,3 +1,59 @@
 h1{
     color:green
 }
+
+/* .boarder {
+    border: 1px solid black;
+    border-radius: 12px;
+    height:800px;
+    width: 500px;
+} */
+.custom-display {
+    height: 50px;
+    width: 50px;
+    padding: 3px;
+}
+
+body {
+    padding-top: 50px;
+}
+
+.h1-custom {
+    font-family: 'Cookie', cursive;
+    font-size: 40px;
+}
+
+.custom-icon {
+    color: black;
+}
+
+.profile-img {
+    width: 200px;
+    height: 200px;
+}
+
+#profile-images {
+    height: 300px;
+    width: 300px;
+    padding: 10px;
+}
+
+.hide-button {
+    visibility: hidden;
+}
+
+.custom-center {
+    padding-left: 250px;
+}
+
+.ml-custom {
+    margin-left: 100px;
+}
+
+.custom-fontsize {
+    font-size: 50px;
+}
+
+#pad-left {
+    padding-left: 20px;
+}
