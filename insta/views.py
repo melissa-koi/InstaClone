@@ -4,3 +4,5 @@ from django.shortcuts import render
 def home(request):
     title="title"
     return render(request, 'index.html',{"title": title})
+
+def profile(request):
