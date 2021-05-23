@@ -1,6 +1,7 @@
 from django.db import models
 import datetime as dt
 from django.contrib.auth.models import User
+from cloudinary.models import CloudinaryField
 # Create your models here.
 
 class Profile(models.Model):
@@ -12,11 +13,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     biography = models.TextField(blank=True)
     phone_number = models.CharField(max_length=20, blank=True)
-    picture = models.ImageField(
-        upload_to='users/pictures',
-        blank=True,
-        null=True
-    )
+    picture = CloudinaryField('photos')
     created = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         """Return username"""
@@ -27,12 +24,9 @@ class Post(models.Model):
 
     # user = models.ForeignKey(User, on_delete=models.CASCADE)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
-
     title = models.CharField(max_length=255)
-    photo = models.ImageField(upload_to='posts/photos')
-
+    photo = CloudinaryField('photos')
     created = models.DateTimeField(auto_now_add=True)
-    modified = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         """Return title and username"""
