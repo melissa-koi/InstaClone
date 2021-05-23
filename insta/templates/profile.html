@@ -3,87 +3,32 @@
 {% block content %}
 {{ block.super}}
 
-
-<header>
-
-    <div class="container">
-
-        <div class="profile">
-
-            <div class="profile-image">
-
-                <img src="https://thednetworks.com/wp-content/uploads/2012/01/picture_not_available_400-300.png">
-            </div>
-
-            <div class="profile-user-settings">
-
-                <h1 class="profile-user-name">{{ request.user.username }}</h1>
-
-                <button class="btn profile-edit-btn">Edit Profile</button>
-
-                <button class="btn profile-settings-btn" aria-label="profile settings"><i class="fas fa-cog" aria-hidden="true"></i></button>
-                <a href="/logout/">logout</a>
-
-            </div>
-
-            <div class="profile-stats">
-
-                <ul>
-                    <li><span class="profile-stat-count">{{images|length}}</span> posts</li>
-                    <li><span class="profile-stat-count">0</span> followers</li>
-                    <li><span class="profile-stat-count">0</span> following</li>
-                </ul>
-
-            </div>
-
-            <div class="profile-bio">
-
-                <p><span class="profile-real-name"></span> {{ request.user.profile.bio }}</p>
-
-            </div>
-
-        </div>
-        <!-- End of profile section -->
-
-    </div>
-    <!-- End of container -->
-
-</header>
-
-<main>
-
-    <div class="container">
-
-        <div class="gallery row">
-            {% for image in images %}
-
-            <div class="gallery-item col col-md-4" tabindex="0">
-
-                <img width="300px" height="300px" src="{{image.image.url}}" alt="">
-
-                <div class="gallery-item-info">
-
-                    <ul>
-                        <li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 56</li>
-                        <li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 2</li>
-                    </ul>
-
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="content-section">
+                <div class="media">
+                    <img src="{{ user.profile.profile_pic.url }}" alt="profile image" class="rounded-circle profile-img">
+                    <div class="media-body">
+                        <h2 class="account-heading ml-4">Username: {{ user.username }}</h2>
+                        <p class="text-secondary ml-4"> Email: {{ user.email }}</p>
+                        <p class="text-secondary ml-4">Bio: {{ user.profile.bio }}</p>
+                    </div>
                 </div>
-
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        <legend class="boarder-bottom mb-4">Profile Info</legend>
+                        {{ u_form }}
+                        {{ p_form }}
+                    </fieldset>
+                    <div class="form-group">
+                        <button class="btn btn-outline-info" type="submit">Update</button>
+                    </div>
+                </form>
             </div>
-
-
-
-
         </div>
-        <!-- End of gallery -->
-        {% endfor %}
-
-        <div class="loader"></div>
-
+        <div class="col-md-8"></div>
     </div>
-    <!-- End of container -->
-
-</main>
-
+</div>
 {% endblock %}

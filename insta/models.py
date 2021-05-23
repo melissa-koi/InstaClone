@@ -13,7 +13,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     biography = models.TextField(blank=True)
     phone_number = models.CharField(max_length=20, blank=True)
-    picture = CloudinaryField('photos')
+    picture = CloudinaryField('photos',default='default.jpg')
     created = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         """Return username"""
