@@ -19,6 +19,11 @@ class Profile(models.Model):
         """Return username"""
         return self.user.username
 
+    @classmethod
+    def get_user(cls,username):
+        profile = cls.objects.filter(user__username__icontains=username)
+        return profile
+
 class Post(models.Model):
     """Post Model."""
 
@@ -62,17 +67,21 @@ class Image(models.Model):
     image = CloudinaryField('photos')
     image_name = models.CharField(max_length=30, blank=True)
     image_caption = models.TextField(max_length=100, blank=True)
-    user = models.ForeignKey(User, related_name="posted_by", on_delete=models.CASCADE, null=True)
-    liker = models.ForeignKey(User, related_name='liked_by', on_delete=models.CASCADE, null=True)
     post_date = models.DateTimeField(auto_now=True)
+    user = models.ForeignKey(User, related_name="posted_by", on_delete=models.CASCADE, null=True)
 
     class Meta:
         ordering = ['-post_date']
 
     def __str__(self):
-        return self.image_name
+        return self.image_caption
 
     @classmethod
     def get_all(cls):
         images = cls.objects.all()
+        return images
+
+    @classmethod
+    def get_image_by_user(cls,username):
+        images = cls.objects.filter(user__username__contains=username)
         return images

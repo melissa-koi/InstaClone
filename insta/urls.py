@@ -5,9 +5,10 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.home, name = 'home'),
-    path('profile/', views.profile, name="profile"),
+    path('profile/<username>', views.profile, name="profile"),
     path('profile/update/', views.update_profile, name="update_profile"),
-    path('photo/post/', views.post_photo, name = 'post_photo'),
+    path('profile/post/', views.post_photo, name = 'post_photo'),
+    path('images/<pk>/', views.image_detail, name = 'image_detail'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
