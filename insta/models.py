@@ -24,18 +24,6 @@ class Profile(models.Model):
         profile = cls.objects.filter(user__username__icontains=username)
         return profile
 
-class Post(models.Model):
-    """Post Model."""
-
-    # user = models.ForeignKey(User, on_delete=models.CASCADE)
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    title = models.CharField(max_length=255)
-    photo = CloudinaryField('photos')
-    created = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        """Return title and username"""
-        return "{} by @{}".format(self.title, self.profile.user.username)
 
 class Image(models.Model):
     '''
