@@ -15,8 +15,8 @@ def profile(request):
     This method handles the user profile
     '''
     title = 'Profile'
-
     return render(request,'profile.html',{"title":title})
+
 def update_profile(request):
     if request.method == "POST":
         u_form = UserUpdateForm(request.POST,instance=request.user)
