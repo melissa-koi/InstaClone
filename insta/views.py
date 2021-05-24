@@ -7,9 +7,8 @@ from .forms import ProfileUpdateForm,UserUpdateForm, UploadImage
 # Create your views here.
 def home(request):
     title="title"
-
-    return render(request, 'index.html',{"title": title})
-
+    images = Image.get_all()
+    return render(request, 'index.html',{"title": title, "posts":images})
 
 def profile(request, username):
     '''
