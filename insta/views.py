@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Post, Profile, Image
 import datetime as dt
 from django.contrib import messages
-from .forms import ProfileUpdateForm,UserUpdateForm
+from .forms import ProfileUpdateForm,UserUpdateForm, UploadImage
 
 # Create your views here.
 def home(request):
@@ -31,3 +31,13 @@ def update_profile(request):
         p_form = ProfileUpdateForm(instance=request.user.profile)
 
     return render(request,'update_profile.html',{"u_form":u_form, "p_form":p_form})
+
+def post_photo(request):
+    if request.method == "POST":
+        form = UploadImage(request.POST,instance=request.image)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = UploadImage(request.POST,instance=request.image)
+    return render(request, 'post_image.html', {"form":form})
