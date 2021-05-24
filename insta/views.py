@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Post, Profile, Image
+from .models import Profile, Image
 import datetime as dt
 from django.contrib import messages
 from .forms import ProfileUpdateForm,UserUpdateForm, UploadImage
