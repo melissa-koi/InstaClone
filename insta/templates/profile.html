@@ -31,9 +31,9 @@
     <div class="row">
         {% if images %}
         {% for image in images %}
-        <div class="col-md-4" >
+        <div class="col-md-3" >
             <a href="{% url 'image_detail' image.id %}">
-                <img src="{{ image.image.url }}" alt="{{ image.image_caption }} image" id="profile-images" style="padding-right:0px">
+                <img src="{{ image.image.url }}" alt="{{ image.image_caption }} image" id="profile-image">
             </a>
         </div>
         {% endfor %}

@@ -38,6 +38,12 @@ body {
     width: 300px;
     padding: 10px;
 }
+#profile-image{
+    height: 280px;
+    width: 280px;
+    padding: 0px;
+    margin: 0px;
+}
 
 
 .hide-button {
