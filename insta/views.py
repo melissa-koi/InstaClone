@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Profile, Image, Comment
+from .models import Profile, Image, Comment, Likes
 import datetime as dt
 from django.contrib import messages
 from .forms import ProfileUpdateForm,UserUpdateForm, UploadImage, CommentForm
@@ -10,7 +10,8 @@ def home(request):
     images = Image.get_all()
     form = CommentForm()
     comments = Comment.objects.all()
-    return render(request, 'index.html',{"title": title, "posts":images, "form":form, "comments":comments})
+    all_likes = Likes.objects.all()
+    return render(request, 'index.html',{"title": title, "posts":images, "form":form, "comments":comments, "likes":all_likes})
 
 def image_detail(request, username):
     images = Image.get_image_by_user(username)
@@ -64,5 +65,21 @@ def post_photo(request):
     else:
         form = UploadImage()
     return render(request, 'post_image.html', {"form":form})
+
+def Like(request,pk):
+    '''
+    Implements the like functionality in the app
+    '''
+    current_user = request.user
+    likes = Likes.objects.filter(user=current_user).first()
+    if likes is None:
+        image = Image.objects.get(pk=pk)
+        current_user = request.user
+        user_likes = Likes(user=current_user,image=image)
+        user_likes.save()
+        return redirect('home')
+    else:
+        likes.delete()
+        return redirect('home')
 
 

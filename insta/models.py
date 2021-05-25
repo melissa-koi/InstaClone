@@ -66,3 +66,14 @@ class Comment(models.Model):
 class Followers(models.Model):
     username= models.ForeignKey(User,on_delete=models.CASCADE)
     user = models.CharField(max_length=100)
+
+class Likes(models.Model):
+    '''
+    This model will contain the columns to our likes class
+    '''
+    image_like = models.IntegerField(default=0)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    image = models.ForeignKey(Image,on_delete=models.CASCADE)
+
+    def __int__(self):
+        return self.like

@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css">
 {% block content%}
 {{block.super}}
 <h1 class="text-center">Home page</h1>
@@ -13,12 +13,13 @@
             <div class="gallery-item">
                 <div class="card" style="width: 45rem; margin-left:15rem; margin-bottom:5rem">
                     <div class="custom-card-header">
-                        <a href="{% url 'profile' post.user %}"style="text-decoration:none ;color: black;">
+                        <a href="{% url 'profile' post.user %}" style="text-decoration:none ;color: black;">
                             <p class="username" style="font-weight: bold; font-style: italic; font-size: large;">{{post.user}}</p>
                         </a>
                     </div>
 
                     <img src="{{post.image.url}}" class="gallery-image">
+                    <a href="{% url 'image-like' pk=post.id %}" style="text-decoration:none; color:black"><i class="fa fa-heart" style="color:red; text-decoration:none; margin-right:6px; font-size:19px">Like</i>{{ post.likes_set.all|length }}</a>
                     <div class="card-body">
                         <div class="card-footer-section">
                             <p class="card-text username" style="font-size: 23px">{{post.image_caption}}</p>
