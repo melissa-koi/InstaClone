@@ -31,8 +31,8 @@
     <div class="row">
         {% if images %}
         {% for image in images %}
-        <div class="col-md-3" >
-            <a href="{% url 'image_detail' image.id %}">
+        <div class="col-md-3 mb-5" >
+            <a href="{% url 'image_detail' image.id %}" >
                 <img src="{{ image.image.url }}" alt="{{ image.image_caption }} image" id="profile-image">
             </a>
         </div>
