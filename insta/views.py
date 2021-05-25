@@ -1,14 +1,26 @@
 from django.shortcuts import render, redirect
-from .models import Profile, Image
+from .models import Profile, Image, Comment
 import datetime as dt
 from django.contrib import messages
-from .forms import ProfileUpdateForm,UserUpdateForm, UploadImage
+from .forms import ProfileUpdateForm,UserUpdateForm, UploadImage, CommentForm
 
 # Create your views here.
 def home(request):
     title="title"
     images = Image.get_all()
-    return render(request, 'index.html',{"title": title, "posts":images})
+    form = CommentForm()
+    comments = Comment.objects.all()
+    return render(request, 'index.html',{"title": title, "posts":images, "form":form, "image_comments":comments})
+
+def comment(request,image_id):
+    image=Image.objects.get(pk=image_id)
+    comments=request.GET.get("comments")
+    current_user=request.user
+    comment = Comment(image=image,comment=comments,user=current_user)
+    comment.save_comment()
+
+    return redirect('home')
+
 
 def profile(request, username):
     '''
@@ -27,7 +39,7 @@ def update_profile(request):
             u_form.save()
             p_form.save()
             messages.success(request,f"You Have Successfully Updated Your Profile!")
-            return redirect('profile/1')
+            #return redirect('profile/1')
     else:
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=request.user.profile)
@@ -42,10 +54,12 @@ def post_photo(request):
             img = form.save(commit=False)
             img.user = C_user
             img.save()
-        # return redirect('index')
+        return redirect('home')
     else:
         form = UploadImage()
     return render(request, 'post_image.html', {"form":form})
 
 def image_detail(request, pk):
     model = Image
+
+

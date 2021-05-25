@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
-
+{% load static %}
+{% load bootstrap5 %}
 {% block content%}
 {{block.super}}
 <h1 class="text-center">Home page</h1>
@@ -13,7 +14,7 @@
             <div class="gallery-item">
                 <div class="card" style="width: 45rem; margin-left:15rem; margin-bottom:5rem">
                     <div class="custom-card-header">
-                        <a href="{% url 'image_detail' image.id %}">
+                        <a href="{% url 'profile' post.user %}">
                             <p class="username" style="font-weight: bold; font-style: italic; font-size: large;">{{post.user}}</p>
                         </a>
                     </div>
@@ -28,8 +29,8 @@
                 </div>
             </div>
         </div>
-        {% endfor %}
 
+        {% endfor %}
     </div>
 </div>
 {% endblock %}

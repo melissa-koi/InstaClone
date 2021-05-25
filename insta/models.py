@@ -50,3 +50,19 @@ class Image(models.Model):
     def get_image_by_user(cls,username):
         images = cls.objects.filter(user__username__contains=username)
         return images
+
+class Comment(models.Model):
+    comment = models.CharField(max_length=300)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    image=models.ForeignKey(Image, on_delete=models.CASCADE, related_name="comments", null=True)
+
+    def save_comment(self):
+        self.save()
+
+    @classmethod
+    def get_post_comments(cls,image):
+        return cls.objects.filter(image=image)
+
+class Followers(models.Model):
+    username= models.ForeignKey(User,on_delete=models.CASCADE)
+    user = models.CharField(max_length=100)
