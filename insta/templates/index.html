@@ -7,13 +7,15 @@
 <div class="container">
 
     <div class="row">
-        {% for post in posts %}
-        <div class="col-md-10 col-lg-10">
-            <div class="gallery-item">
 
-                <div class="card" style="width: 75rem;">
+        {% for post in posts %}
+        <div class="col-md-10">
+            <div class="gallery-item">
+                <div class="card" style="width: 45rem; margin-left:15rem; margin-bottom:5rem">
                     <div class="custom-card-header">
-                        <p class="username">{{post.user}}</p>
+                        <a href="{% url 'image_detail' image.id %}">
+                            <p class="username" style="font-weight: bold; font-style: italic; font-size: large;">{{post.user}}</p>
+                        </a>
                     </div>
 
                     <img src="{{post.image.url}}?w=800&h=1000&fit=crop" class="gallery-image">
@@ -27,6 +29,7 @@
             </div>
         </div>
         {% endfor %}
+
     </div>
 </div>
 {% endblock %}
