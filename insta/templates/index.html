@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
-{% load static %}
-{% load bootstrap5 %}
+
 {% block content%}
 {{block.super}}
 <h1 class="text-center">Home page</h1>
@@ -14,7 +13,7 @@
             <div class="gallery-item">
                 <div class="card" style="width: 45rem; margin-left:15rem; margin-bottom:5rem">
                     <div class="custom-card-header">
-                        <a href="{% url 'profile' post.user %}">
+                        <a href="{% url 'profile' post.user %}"style="text-decoration:none ;color: black;">
                             <p class="username" style="font-weight: bold; font-style: italic; font-size: large;">{{post.user}}</p>
                         </a>
                     </div>
@@ -22,15 +21,41 @@
                     <img src="{{post.image.url}}?w=800&h=1000&fit=crop" class="gallery-image">
                     <div class="card-body">
                         <div class="card-footer-section">
-                            <p class="card-text username">{{post.user}} <span class="caption"> {{post.image_caption}}</span></p>
-                            <p class="card-text username">{{post.post_date}} </p>
+                            <p class="card-text username" style="font-size: large;">{{post.image_caption}}</p>
+                            <p class="text-muted card-text username">{{post.post_date}} </p>
+                            {% for comment in image_comments %}
+                            {% if comment.image.id == post.id %}
+                            <div>
+                                <h5 class="text-center text-muted">All comments</h5>
+                                <p style="font-size: 1.2rem; font-weight:bold">{{comment.user}}</p>
+                                <p style="font-size: 1rem;">{{comment.comment}}</p></sp>
+                            </div>
+                            {% endif %}
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
 
-        {% endfor %}
+        <div class="card-footer" style="padding: 0;">
+            <form role="add_comment"  action="{% url 'AddComment' pk=post.id %}">
+                {% csrf_token%}
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Add a comment..." name="comments"
+                           style="font-size: 1.2rem; border: 0;">
+                    <div class="input-group-btn">
+                        <button class="btn" type="submit" style="font-size: 1.2rem;"> Post</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        </div>
+{% endfor %}
+
+
+
     </div>
 </div>
 {% endblock %}

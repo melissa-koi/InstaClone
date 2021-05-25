@@ -12,8 +12,8 @@ def home(request):
     comments = Comment.objects.all()
     return render(request, 'index.html',{"title": title, "posts":images, "form":form, "image_comments":comments})
 
-def comment(request,image_id):
-    image=Image.objects.get(pk=image_id)
+def comment(request,pk):
+    image=Image.objects.get(pk=pk)
     comments=request.GET.get("comments")
     current_user=request.user
     comment = Comment(image=image,comment=comments,user=current_user)
