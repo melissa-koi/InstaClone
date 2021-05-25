@@ -10,7 +10,7 @@ def home(request):
     images = Image.get_all()
     form = CommentForm()
     comments = Comment.objects.all()
-    return render(request, 'index.html',{"title": title, "posts":images, "form":form, "image_comments":comments})
+    return render(request, 'index.html',{"title": title, "posts":images, "form":form, "comments":comments})
 
 def comment(request,pk):
     image=Image.objects.get(pk=pk)
