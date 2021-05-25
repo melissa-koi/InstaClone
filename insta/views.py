@@ -6,11 +6,17 @@ from .forms import ProfileUpdateForm,UserUpdateForm, UploadImage, CommentForm
 
 # Create your views here.
 def home(request):
-    title="title"
+    title="explore page"
     images = Image.get_all()
     form = CommentForm()
     comments = Comment.objects.all()
     return render(request, 'index.html',{"title": title, "posts":images, "form":form, "comments":comments})
+
+def image_detail(request, username):
+    images = Image.get_image_by_user(username)
+    form = CommentForm()
+    comments = Comment.objects.all()
+    return render(request, 'image_detail.html',{"posts":images, "form":form, "comments":comments})
 
 def comment(request,pk):
     image=Image.objects.get(pk=pk)
@@ -58,8 +64,5 @@ def post_photo(request):
     else:
         form = UploadImage()
     return render(request, 'post_image.html', {"form":form})
-
-def image_detail(request, pk):
-    model = Image
 
 

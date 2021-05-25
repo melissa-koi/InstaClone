@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content%}
+{{block.super}}
+
+<div class="container">
+
+    <div class="row">
+
+        {% for post in posts %}
+        <div class="col-md-10">
+            <div class="gallery-item">
+                <div class="card" style="width: 45rem; margin-left:15rem; margin-bottom:5rem">
+                    <div class="custom-card-header">
+                        <a href="{% url 'profile' post.user %}"style="text-decoration:none ;color: black;">
+                            <p class="username" style="font-weight: bold; font-style: italic; font-size: large;">{{post.user}}</p>
+                        </a>
+                    </div>
+
+                    <img src="{{post.image.url}}" class="gallery-image">
+                    <div class="card-body">
+                        <div class="card-footer-section">
+                            <p class="card-text username" style="font-size: 23px">{{post.image_caption}}</p>
+                            <p class="text-muted card-text username">{{post.post_date}} </p>
+                            <h5 class="text-center text-muted">All comments</h5>
+                            {% for comment in comments %}
+                            {% if comment.image.id == post.id %}
+                            <div class="mb-2">
+                                <em style="font-size: 1.2rem; font-weight:bold">{{comment.user}}</em>
+                                <em style="font-size: 1rem;">{{comment.comment}}</em>
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="card-footer" style="padding: 0;">
+                        <form action="{% url 'AddComment' pk=post.id %}">
+                            {% csrf_token%}
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Add a comment..." name="comments"
+                                       style="font-size: 1.1rem; border: 0; padding:1rem">
+                                <div class="input-group-btn">
+                                    <button class="btn" type="submit" style="font-size: 1.2rem;"> Post</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
