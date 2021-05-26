@@ -30,5 +30,5 @@ Here are the steps to follow:
 ## Running the tests
 After installing the application you can run the tests using the command -python3 manage.py test gallery- on the virtual environment.
 
-## [Link](  ) to live webpage
+## [Link]( https://instaclone-m.herokuapp.com/ ) to live webpage
 ## [License](https://github.com/melissa-koi/InstaClone/blob/main/LICENSE)
