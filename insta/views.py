@@ -82,4 +82,5 @@ def Like(request,pk):
         likes.delete()
         return redirect('home')
 
-
+def search_results(request):
+    model=Image
