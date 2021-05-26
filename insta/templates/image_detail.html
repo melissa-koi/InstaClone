@@ -18,6 +18,7 @@
                     </div>
 
                     <img src="{{post.image.url}}" class="gallery-image">
+                    <a href="{% url 'image-like' pk=post.id %}" style="text-decoration:none; color:black"><i class="fa fa-heart" style="color:red; text-decoration:none; margin-right:6px; font-size:19px">Like</i>{{ post.likes_set.all|length }}</a>
                     <div class="card-body">
                         <div class="card-footer-section">
                             <p class="card-text username" style="font-size: 23px">{{post.image_caption}}</p>
