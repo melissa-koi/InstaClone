@@ -2,7 +2,7 @@
 ### By Melissa Wangui
 
 ## Description
-This is an application that attempts to clone the website for the popular photo app Instagram
+This is an application that attempts to clone the website for the popular photo app Instagram.
 
 ## Prerequisites
 * Python3.8
@@ -30,5 +30,5 @@ Here are the steps to follow:
 ## Running the tests
 After installing the application you can run the tests using the command -python3 manage.py test gallery- on the virtual environment.
 
-## [Link]( https://m-gallery123.herokuapp.com/ ) to live webpage
+## [Link](  ) to live webpage
 ## [License](https://github.com/melissa-koi/InstaClone/blob/main/LICENSE)
