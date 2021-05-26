@@ -2,8 +2,10 @@
 
 {% block content %}
 {{ block.super}}
+
 <div class="container">
     <div class="row">
+
         <div class="col-md-12">
             <div class="content-section">
                 <div class="media" style="display: flex">
@@ -13,10 +15,11 @@
                             <div class="display">
                                 <p class="custom-fontsize">{{ user.username }}
 <!--                                Here-->
+                                    <a href="{% url 'create_profile' %}" ><button class="btn btn-outline-secondary">Create Profile</button></a>
                                     <a href="{% url 'update_profile' %}" ><button class="btn btn-outline-secondary">Edit Profile</button></a>
                                 </p>
                                 <p>
-                                    <i><strong id="pad-left">{{ user.image_set.all|length }}</strong> posts</i><i id="pad-left"><strong id="pad-left">{{ users|length}}</strong> followers</i><i id="pad-left"><strong >{{ users|length}}</strong> following</i>
+                                    <i><strong id="pad-left">{{ user.image_set.all|length }}</strong> posts</i><i id="pad-left"><strong id="pad-left">{{ user|length}}</strong> followers</i><i id="pad-left"><strong >{{ user|length}}</strong> following</i>
                                 </p>
                             </div>
                             <p class="text-secondary"> Email: {{ user.email }}</p>
@@ -26,6 +29,7 @@
                 </div>
             </div>
         </div>
+
     </div>
     <hr>
     <div class="row">

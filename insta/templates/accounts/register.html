@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap5 %}
+{% block content%}
+{{block.super}}
+<div class="container">
+    <h1>Register</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        {% bootstrap_form form%}
+
+        {% if form.errors %}
+        {% for field in form %}
+        {% for error in field.errors %}
+        {{ error|escape }}
+        {% endfor %}
+        {% endfor %}
+        {% for error in form.non_field_errors %}
+        {{ error|escape }}
+        {% endfor %}
+        {% endif %} <br><br>
+        <input type="submit" value="Register">
+    </form>
+</div>
+{% endblock %}

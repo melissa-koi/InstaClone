@@ -1,19 +1,19 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-    <a class="navbar-brand h1-custom ml-5" href="/" ><i class="fa fa-instagram"></i> | InstaClone</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" style="margin-bottom:50px">
+    <a class="navbar-brand h1-custom ml-5" href="/" >InstaClone</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-  
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-          <div class="col-sm-4 col-md-4 navbar-center">
+          <div class="col-sm-4 col-md-6">
 
-              <form class="navbar-form" role="search" action="{% url 'search_results' %}">
+              <form class="navbar-form ml-5" role="search" action="{% url 'search_results' %}">
 
                   <div class="input-group">
                       <input type="text" class="form-control" placeholder="Search profile" name="profile">
                       <div class="input-group-btn">
-                          <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
+                          <button class="btn btn-default" type="submit">Submit</i></button>
                       </div>
                   </div>
 
@@ -24,21 +24,28 @@
         <li class="nav-item">
             <a class="nav-link" href="{% url 'home' %}">Explore</a>
         </li>
-        <div class="justify-content-end">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <svg aria-label="Profile" class="_8-yf5 " fill="#262626" height="24" viewBox="0 0 48 48" width="24"><g><path d="M24 27c-7.1 0-12.9-5.8-12.9-12.9s5.8-13 12.9-13c7.1 0 12.9 5.8 12.9 12.9S31.1 27 24 27zm0-22.9c-5.5 0-9.9 4.5-9.9 9.9s4.4 10 9.9 10 9.9-4.5 9.9-9.9-4.4-10-9.9-10zM44 46.9c-.8 0-1.5-.7-1.5-1.5V42c0-5-4-9-9-9h-19c-5 0-9 4-9 9v3.4c0 .8-.7 1.5-1.5 1.5s-1.5-.7-1.5-1.5V42c0-6.6 5.4-12 12-12h19c6.6 0 12 5.4 12 12v3.4c0 .8-.7 1.5-1.5 1.5z"></path></g></svg>
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{% url 'home' %}">Explore</a>
-            <a class="dropdown-item" href="{% url 'post_photo' %}">Upload image</a>
-            <a class="dropdown-item" href="/profile/{{ user.username }}">My Profile</a>
-            <div class="dropdown-divider"></div>
-
-             </div>
-          </div>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'post_photo' %}">Upload image</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/profile/{{ user.username }}">My Profile</a>
+        </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'logout' %}">logout</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'register' %}">Register</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'login' %}">login</a>
+        </li>
+        {% endif %}
+        <div class="justify-content-end">
+
       </div>
     </ul>
+
     </div>
   </nav>

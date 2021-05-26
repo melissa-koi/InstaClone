@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap5 %}
+{% block content%}
+{{block.super}}
+<div class="container">
+    <h1>Login</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        <label>Username</label><br>
+        <input type="text" name="username" class="my-2"><br>
+        <label>Password</label><br>
+        <input type="password" name="password" class="my-2"><br>
+
+        {% for message in messages %}
+        {{message}}
+        {% endfor %} <br><br>
+
+        <input type="submit" value="Login">
+    </form>
+</div>
+{% endblock %}

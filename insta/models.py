@@ -33,7 +33,7 @@ class Image(models.Model):
     image_name = models.CharField(max_length=30, blank=True)
     image_caption = models.TextField(max_length=100, blank=True)
     post_date = models.DateTimeField(auto_now=True)
-    user = models.ForeignKey(User, related_name="posted_by", on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, related_name="img_user", on_delete=models.CASCADE, null=True)
 
     class Meta:
         ordering = ['-post_date']
