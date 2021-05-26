@@ -13,8 +13,7 @@
                     <div class="media-body">
                         <div class="ml-custom">
                             <div class="display">
-                                <p class="custom-fontsize">{{ user.username }}
-<!--                                Here-->
+                                <p class="custom-fontsize">{{ request.user}}
                                     <a href="{% url 'create_profile' %}" ><button class="btn btn-outline-secondary">Create Profile</button></a>
                                     <a href="{% url 'update_profile' %}" ><button class="btn btn-outline-secondary">Edit Profile</button></a>
                                 </p>
