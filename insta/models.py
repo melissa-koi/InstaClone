@@ -51,6 +51,13 @@ class Image(models.Model):
         images = cls.objects.filter(user__username__contains=username)
         return images
 
+    def save_Image(self):
+        self.save()
+        
+    def delete_image(self):
+        self.delete()
+        
+        
 class Comment(models.Model):
     comment = models.CharField(max_length=300)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
@@ -58,6 +65,9 @@ class Comment(models.Model):
 
     def save_comment(self):
         self.save()
+    
+    def delete_comment(self):
+        self.delete()
 
     @classmethod
     def get_post_comments(cls,image):
@@ -75,5 +85,11 @@ class Likes(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     image = models.ForeignKey(Image,on_delete=models.CASCADE)
 
+    def save_like(self):
+        self.save()
+
+    def delete_like(self):
+        self.delete()
+        
     def __int__(self):
         return self.like
